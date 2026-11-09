@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Input Data Penduduk</title>
+</head>
+<body>
+    <h2>Form Input Data Penduduk</h2>
+
+    <!-- 1. Tag form: Mengirim data ke 'input.php' dengan metode POST -->
+    <!-- Atribut onsubmit akan memanggil fungsi JavaScript validateForm() sebelum dikirim -->
+    <form action="input.php" method="post" onsubmit="return validateForm(event)">
+        
+        <!-- Field Input Kecamatan -->
+        <label for="kec">Kecamatan:</label><br>
+        <input type="text" id="kec" name="kecamatan" required><br><br>
+
+        <!-- Field Input Longitude -->
+        <label for="long">Longitude:</label><br>
+        <input type="text" id="long" name="longitude" required><br><br>
+
+        <!-- Field Input Latitude -->
+        <label for="lat">Latitude:</label><br>
+        <input type="text" id="lat" name="latitude" required><br><br>
+
+        <!-- Field Input Luas Wilayah -->
+        <label for="luas">Luas (Ha):</label><br>
+        <input type="text" id="luas" name="luas" required><br><br>
+
+        <!-- Field Input Jumlah Penduduk -->
+        <label for="jml_pddk">Jumlah Penduduk:</label><br>
+        <input type="text" id="jml_pddk" name="jumlah_penduduk" required><br><br>
+
+        <!-- Tombol untuk submit/mengirim form -->
+        <input type="submit" value="Simpan Data">
+    </form>
+
+    <!-- 2. Paragraf khusus untuk menampilkan pesan peringatan/error dari JavaScript -->
+    <p id="informasi" style="color: red;"></p>
+
+    <!-- 3. Skrip JavaScript untuk validasi data sisi klien (Client-side Validation) -->
+    <script>
+        function validateForm(event){
+            // Ambil nilai dari inputan 'luas' berdasarkan ID-nya
+            let luas = document.getElementById("luas").value;
+            let text = "";
+            
+            // Mengecek apakah inputan luas bukan angka (isNaN) atau nilainya kurang dari 1 (nol/negatif)
+            if(isNaN(luas) || luas < 1){
+                text = "Data luas harus angka dan tidak boleh bernilai negatif";
+                // event.preventDefault() membatalkan proses submit form jika validasi gagal
+                event.preventDefault();
+            }
+
+            // Menampilkan pesan error ke dalam elemen <p id="informasi">
+            document.getElementById("informasi").innerHTML = text;
+        }
+    </script>
+</body>
+</html>
